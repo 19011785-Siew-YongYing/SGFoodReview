@@ -79,7 +79,24 @@ public class ModifyActivity extends AppCompatActivity {
                 song.setTitle(editTitle.getText().toString());
                 song.setSingers(editSinger.getText().toString());
                 song.setYears(Integer.parseInt(editYear.getText().toString()));
-                song.setStars(groupB.getCheckedRadioButtonId());
+                int checkB = groupB.getCheckedRadioButtonId();
+                int starss = 0;
+                if (checkB == R.id.radioB1) {
+                    starss = 1;
+                }
+                else if (checkB == R.id.radioB2) {
+                    starss = 2;
+                }
+                else if (checkB == R.id.radioB3) {
+                    starss = 3;
+                }
+                else if (checkB == R.id.radioB4) {
+                    starss = 4;
+                }
+                else if (checkB == R.id.radioB5) {
+                    starss = 5;
+                }
+                song.setStars(starss);
                 dbh.updateSong(song);
                 dbh.close();
                 finish();

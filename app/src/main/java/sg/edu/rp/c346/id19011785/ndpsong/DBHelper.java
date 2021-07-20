@@ -42,7 +42,6 @@ public class DBHelper extends SQLiteOpenHelper {
             values.put(COLUMN_STARS, 5);
             db.insert(TABLE_SONG, null, values);
         }
-
     }
 
     @Override
@@ -106,8 +105,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getReadableDatabase();
         String[] columns = {COLUMN_TITLE, COLUMN_SINGERS, COLUMN_YEARS, COLUMN_STARS};
-        String condition = COLUMN_STARS + " == 5";
-        String[] args = {" WHERE " + stars + " == 5" };
+        String condition = COLUMN_STARS + " == ?";
+        String[] args = {String.valueOf(stars)};
 
         Cursor cursor = db.query(TABLE_SONG, columns, condition, args, null, null, null, null);
 

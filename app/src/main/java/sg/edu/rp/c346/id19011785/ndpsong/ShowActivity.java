@@ -18,7 +18,8 @@ public class ShowActivity extends AppCompatActivity {
     ArrayList<Song> songAL;
     ListView songLV;
     ArrayAdapter<Song> songAA;
-    Song data;
+    Song songs;
+    boolean check = false;
 
     // Enhancement for spinner is not completed because I could not test out other functions
     // Will try the enhancement soon and commit to GitHub
@@ -31,10 +32,13 @@ public class ShowActivity extends AppCompatActivity {
         show5s = findViewById(R.id.btnShow5S);
 
         Intent i = getIntent();
-        data = (Song)i.getSerializableExtra("song");
+        songs = (Song) i.getSerializableExtra("song");
+
+        DBHelper dbh = new DBHelper(ShowActivity.this);
 
         songLV = findViewById(R.id.lvSongs);
         songAL = new ArrayList<Song>();
+        songAL.addAll(dbh.getAllSongs());
         songAA = new ArrayAdapter<Song>(this, android.R.layout.simple_list_item_1, songAL);
         songLV.setAdapter(songAA);
         
@@ -43,12 +47,16 @@ public class ShowActivity extends AppCompatActivity {
             public void onClick(View v) {
                 DBHelper dbh = new DBHelper(ShowActivity.this);
                 songAL.clear();
-                int star = data.getStars();
-                if (star != 5) {
+                int star = songs.getStars();
+                if (check == false) {
                     songAL.addAll(dbh.getAllSongs());
+                    songAA.notifyDataSetChanged();
+                    check = true;
                 }
                 else {
                     songAL.addAll(dbh.getAllSongs(5));
+                    songAA.notifyDataSetChanged();
+                    check = false;
                 }
             }
         });
@@ -63,5 +71,11 @@ public class ShowActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        show5s.performClick();
     }
 }
