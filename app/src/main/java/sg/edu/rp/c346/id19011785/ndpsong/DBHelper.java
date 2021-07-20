@@ -33,6 +33,16 @@ public class DBHelper extends SQLiteOpenHelper {
                 + COLUMN_STARS + " INTEGER ) ";
         db.execSQL(createSongTableSql);
         Log.i("info", "created tables");
+
+        for (int i = 0 ; i < 4 ; i ++) {
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_TITLE, "Song Name ");
+            values.put(COLUMN_SINGERS, "Singer ");
+            values.put(COLUMN_YEARS, 2021);
+            values.put(COLUMN_STARS, 5);
+            db.insert(TABLE_SONG, null, values);
+        }
+
     }
 
     @Override

@@ -17,7 +17,7 @@ public class ModifyActivity extends AppCompatActivity {
     TextView viewID, viewTitle, viewSinger, viewYear, viewStar;
     EditText editID, editTitle, editSinger, editYear;
     RadioGroup groupB;
-    RadioButton RB1, RB2, RB3, RB4, RB5;
+    RadioButton b1, b2, b3, b4, b5;
     Button upBtn, delBtn, cancelBtn;
     Song song;
 
@@ -38,6 +38,11 @@ public class ModifyActivity extends AppCompatActivity {
         editYear = findViewById(R.id.yearET);
 
         groupB = findViewById(R.id.radioGroup);
+        b1 = findViewById(R.id.radioB1);
+        b2 = findViewById(R.id.radioB2);
+        b3 = findViewById(R.id.radioB3);
+        b4 = findViewById(R.id.radioB4);
+        b5 = findViewById(R.id.radioB5);
 
         upBtn = findViewById(R.id.btnUpdate);
         delBtn = findViewById(R.id.btnDelete);
@@ -46,12 +51,26 @@ public class ModifyActivity extends AppCompatActivity {
         Intent i = getIntent();
         song = (Song)i.getSerializableExtra("song");
 
-        editID.setText(song.getId());
+        editID.setText(String.valueOf(song.getId()));
         editTitle.setText(song.getTitle());
         editSinger.setText(song.getSingers());
         editYear.setText(song.getYears());
         int stars = song.getStars();
-        groupB.check(stars);
+        if (stars == 1) {
+            b1.setChecked(true);
+        }
+        else if (stars == 2) {
+            b2.setChecked(true);
+        }
+        else if (stars == 3) {
+            b3.setChecked(true);
+        }
+        else if (stars == 4) {
+            b4.setChecked(true);
+        }
+        else if (stars == 5) {
+            b5.setChecked(true);
+        }
 
         upBtn.setOnClickListener(new View.OnClickListener() {
             @Override

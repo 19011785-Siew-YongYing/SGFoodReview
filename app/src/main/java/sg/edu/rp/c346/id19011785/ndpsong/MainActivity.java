@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     EditText etTitle, etSingers, etYear;
     RadioGroup starRBGrp;
     Button btnInsert, btnShow;
+    ArrayList<Song> al;
     Song song;
 
     @Override
@@ -41,37 +42,28 @@ public class MainActivity extends AppCompatActivity {
         btnInsert = findViewById(R.id.btnInsert);
         btnShow = findViewById(R.id.btnShowList);
 
+        // Unable to test out because it keeps crashing (will try to try again)
         btnInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String songTitle = etTitle.getText().toString();
                 String songSinger = etSingers.getText().toString();
                 int songYear = Integer.parseInt(etYear.getText().toString());
-                int checkedButton = starRBGrp.getCheckedRadioButtonId();
-                if (checkedButton == R.id.radioB1) {
-                    song.setStars(1);
-                }
-                else if (checkedButton == R.id.radioB2) {
-                    song.setStars(2);
-                }
-                else if (checkedButton == R.id.radioB3) {
-                    song.setStars(3);
-                }
-                else if (checkedButton == R.id.radioB4) {
-                    song.setStars(4);
-                }
-                else if (checkedButton == R.id.radioB5) {
-                    song.setStars(5);
+                int checkedButton = getStars();
+                /*if (songT.length() == 0 || songS.length() == 0 || songY.length() == 0) {
+                    Toast.makeText(MainActivity.this, "Please input Song Title, Singer or Year", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    Toast.makeText(MainActivity.this, "Please select stars!", Toast.LENGTH_SHORT).show();
-                }
-
+                    songTitle = songT;
+                    songSinger = songS;
+                    songYear = ;
+                }*/
                 DBHelper dbh = new DBHelper(MainActivity.this);
                 long insert_id = dbh.insertSong(songTitle, songSinger, songYear, checkedButton);
 
                 if (insert_id != -1) {
+                    al.clear();
+                    al.addAll(dbh.getAllSongs());
                     Toast.makeText(MainActivity.this, "Song Insert Successfully", Toast.LENGTH_LONG).show();
                 }
             }
@@ -84,6 +76,28 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
 
+    private int getStars() {
+        int stars = 1;
+        if (starRBGrp.getCheckedRadioButtonId() == R.id.rb1) {
+            stars = 1;
+        }
+        else if (starRBGrp.getCheckedRadioButtonId() == R.id.rb2) {
+            stars = 2;
+        }
+        else if (starRBGrp.getCheckedRadioButtonId() == R.id.rb3) {
+            stars = 3;
+        }
+        else if (starRBGrp.getCheckedRadioButtonId() == R.id.rb4) {
+            stars = 4;
+        }
+        else if (starRBGrp.getCheckedRadioButtonId() == R.id.rb5) {
+            stars = 5;
+        }
+        else {
+            Toast.makeText(MainActivity.this, "Please input stars", Toast.LENGTH_LONG).show();
+        }
+        return stars;
     }
 }
