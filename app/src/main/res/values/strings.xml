@@ -25,4 +25,5 @@
     <string name="btnUpdate">UPDATE</string>
     <string name="btnDel">DELETE</string>
     <string name="btnCancel">CANCEL</string>
+
 </resources>

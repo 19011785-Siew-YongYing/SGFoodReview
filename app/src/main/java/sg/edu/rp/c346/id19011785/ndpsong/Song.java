@@ -62,6 +62,11 @@ public class Song implements Serializable {
 
     @Override
     public String toString() {
-        return "Title: " + title + "\nSinger: " + singers + "\nYear: " + years + "\nStars: " + stars;
+        //return "Title: " + title + "\nSinger: " + singers + "\nYear: " + years + "\nStars: " + stars;
+        String starsStr = "";
+        for (int i = 0; i < stars; i++){
+            starsStr += "*";
+        }
+        return title + "\n" + singers + " - " + years + "\n" + starsStr; // Problem 10 - Enhancement
     }
 }
