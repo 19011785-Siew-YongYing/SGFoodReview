@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,8 +21,9 @@ public class MainActivity extends AppCompatActivity {
 
     TextView tvTitle, tvSingers, tvYear, tvStars;
     EditText etTitle, etSingers, etYear;
-    RadioGroup starRBGrp;
-    RadioButton rb1, rb2, rb3, rb4, rb5;
+    /*RadioGroup starRBGrp;
+    RadioButton rb1, rb2, rb3, rb4, rb5;*/
+    RatingBar starRating;
     Button btnInsert, btnShow;
 
     @Override
@@ -38,12 +40,13 @@ public class MainActivity extends AppCompatActivity {
         etSingers = findViewById(R.id.etSingers);
         etYear = findViewById(R.id.etYear);
 
-        starRBGrp = findViewById(R.id.starRBGroup);
+        /*starRBGrp = findViewById(R.id.starRBGroup);
         rb1 = findViewById(R.id.rb1);
         rb2 = findViewById(R.id.rb2);
         rb3 = findViewById(R.id.rb3);
         rb4 = findViewById(R.id.rb4);
-        rb5 = findViewById(R.id.rb5);
+        rb5 = findViewById(R.id.rb5);*/
+        starRating = findViewById(R.id.starRatingB);
         btnInsert = findViewById(R.id.btnInsert);
         btnShow = findViewById(R.id.btnShowList);
 
@@ -60,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
                 String strYear = etYear.getText().toString().trim();
                 int songY = 0;
 
+                int stars = (int)starRating.getRating();
+
                 if (songTitle.length() == 0 || songSinger.length() == 0 || strYear.length() == 0) {
                     Toast.makeText(MainActivity.this, "Please input Song Title, Singer or Year Released!", Toast.LENGTH_SHORT).show();
                     return;
@@ -69,9 +74,8 @@ public class MainActivity extends AppCompatActivity {
                     songS = songSinger;
                     songY = Integer.parseInt(strYear);
                 }
-
                 //int checkedButton = starRBGrp.getCheckedRadioButtonId();
-                int stars = getStars();
+                //int stars = getStars();
                 /*if (checkedButton == R.id.rb1) {
                     stars = 1;
                 }
@@ -98,7 +102,8 @@ public class MainActivity extends AppCompatActivity {
                     etTitle.setText("");
                     etSingers.setText("");
                     etYear.setText("");
-                    starRBGrp.clearCheck();
+                    starRating.setRating(0);
+                    //starRBGrp.clearCheck();
                 }
             }
         });
@@ -110,14 +115,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
     }
 
     // referred to solutions
-    private int getStars() {
+    /*private int getStars() {
         int stars = 1;
-        switch (starRBGrp.getCheckedRadioButtonId()) {
-            case R.id.rb1:
+        switch (starRating.getNumStars()) {
+            case starRating.getNumStars() = 1:
                 stars = 1;
                 break;
 
@@ -138,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return stars;
-    }
+    }*/
 
     // Some Enhancements after solving PS
     @Override
@@ -161,7 +165,6 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor prefEdit = prefs.edit();
 
-        // storing String values first ; radio button still figuring out
         prefEdit.putString("title", storeT);
         prefEdit.putString("singers", storeS);
         prefEdit.putInt("yearR", storeYr);

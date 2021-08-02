@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,8 +18,9 @@ public class ModifyActivity extends AppCompatActivity {
 
     TextView viewID, viewTitle, viewSinger, viewYear, viewStar;
     EditText editID, editTitle, editSinger, editYear;
-    RadioGroup groupB;
-    RadioButton b1, b2, b3, b4, b5;
+    /*RadioGroup groupB;
+    RadioButton b1, b2, b3, b4, b5;*/
+    RatingBar ratebStars;
     Button upBtn, delBtn, cancelBtn;
     Song song;
 
@@ -34,15 +36,11 @@ public class ModifyActivity extends AppCompatActivity {
         viewYear = findViewById(R.id.TVYear);
         viewStar = findViewById(R.id.TVStar);
         editID = findViewById(R.id.idET);
+        editID.setEnabled(false);
         editTitle = findViewById(R.id.titleET);
         editSinger = findViewById(R.id.singersET);
         editYear = findViewById(R.id.yearET);
-        groupB = findViewById(R.id.radioGroup);
-        b1 = findViewById(R.id.radioB1);
-        b2 = findViewById(R.id.radioB2);
-        b3 = findViewById(R.id.radioB3);
-        b4 = findViewById(R.id.radioB4);
-        b5 = findViewById(R.id.radioB5);
+        ratebStars = findViewById(R.id.rbStar);
 
         upBtn = findViewById(R.id.btnUpdate);
         delBtn = findViewById(R.id.btnDelete);
@@ -55,6 +53,7 @@ public class ModifyActivity extends AppCompatActivity {
         editTitle.setText(song.getTitle());
         editSinger.setText(song.getSingers());
         editYear.setText(song.getYears()+"");
+        ratebStars.setRating(song.getStars());
         /*int stars = song.getStars();
         if (stars == 1) {
             b1.setChecked(true);
@@ -72,23 +71,6 @@ public class ModifyActivity extends AppCompatActivity {
             b5.setChecked(true);
         }*/
 
-        switch (song.getStars() ) {
-            case 5:
-                b5.setChecked(true);
-                break;
-            case 4:
-                b4.setChecked(true);
-                break;
-            case 3:
-                b3.setChecked(true);
-                break;
-            case 2:
-                b2.setChecked(true);
-                break;
-            case 1:
-                b1.setChecked(true);
-        }
-
         upBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,7 +78,7 @@ public class ModifyActivity extends AppCompatActivity {
                 song.setTitle(editTitle.getText().toString().trim());
                 song.setSingers(editSinger.getText().toString().trim());
                 song.setYears(Integer.parseInt(editYear.getText().toString().trim()));
-                int checkedRB = groupB.getCheckedRadioButtonId();
+                /*int checkedRB = groupB.getCheckedRadioButtonId();
                 if (checkedRB == R.id.radioB1) {
                     song.setStars(1);
                 }
@@ -111,7 +93,8 @@ public class ModifyActivity extends AppCompatActivity {
                 }
                 else if (checkedRB == R.id.radioB5) {
                     song.setStars(5);
-                }
+                }*/
+                song.setStars((int) ratebStars.getRating());
 
                 int res = dbh.updateSong(song);
                 if (res > 0) {

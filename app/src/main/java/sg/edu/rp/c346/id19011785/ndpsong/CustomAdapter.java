@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -36,14 +38,22 @@ public class CustomAdapter extends ArrayAdapter {
         TextView songT = rowV.findViewById(R.id.textViewTitle);
         TextView songS = rowV.findViewById(R.id.textViewSinger);
         TextView songYrR = rowV.findViewById(R.id.textViewYrReleased);
-        TextView songStars = rowV.findViewById(R.id.textViewStars);
+        RatingBar songStarRB = rowV.findViewById(R.id.starRBar);
+        ImageView songNew = rowV.findViewById(R.id.ivNew);
 
-        songT.setText(songAL.get(position).getTitle());
-        songS.setText(songAL.get(position).getSingers());
-        songYrR.setText(String.valueOf(songAL.get(position).getYears()));
-        songStars.setText(songAL.get(position).toString());
+        Song current = songAL.get(position);
+        songT.setText(current.getTitle());
+        songS.setText(current.getSingers());
+        songYrR.setText(current.getYears() + "");
+        songStarRB.setRating(current.getStars());
+        songNew.setImageResource(R.drawable.newsong);
 
+        if (current.getYears() >= 2019) {
+            songNew.setVisibility(View.VISIBLE);
+        }
+        else {
+            songNew.setVisibility(View.INVISIBLE);
+        }
         return rowV;
-
     }
 }

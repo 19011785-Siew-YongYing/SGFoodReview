@@ -69,7 +69,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:textSize="20dp"
-        android:inputType="textPersonName"/>
+        android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/TVStar"
@@ -84,7 +84,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <RadioGroup
+        <!--<RadioGroup
             android:id="@+id/radioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -119,7 +119,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/star5" />
-        </RadioGroup>
+        </RadioGroup>-->
+
+        <RatingBar
+            android:id="@+id/rbStar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:stepSize="1" />
+
     </LinearLayout>
 
     <LinearLayout

@@ -71,7 +71,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <RadioGroup
+        <RatingBar
+            android:id="@+id/starRatingB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:stepSize="1" />
+
+        <!--<RadioGroup
             android:id="@+id/starRBGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -106,7 +113,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/star5" />
-        </RadioGroup>
+        </RadioGroup>-->
     </LinearLayout>
 
     <LinearLayout
