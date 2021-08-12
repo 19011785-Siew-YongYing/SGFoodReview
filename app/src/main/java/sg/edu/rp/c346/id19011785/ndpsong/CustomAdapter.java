@@ -18,14 +18,14 @@ import java.util.ArrayList;
 public class CustomAdapter extends ArrayAdapter {
     Context parent_context;
     int layout_id;
-    ArrayList<Song> songAL;
+    ArrayList<SGFood> foodAL;
 
-    public CustomAdapter (Context context, int res, ArrayList<Song> objects) {
+    public CustomAdapter (Context context, int res, ArrayList<SGFood> objects) {
         super (context, res, objects);
 
         parent_context = context;
         layout_id = res;
-        songAL = objects;
+        foodAL = objects;
 
     }
 
@@ -35,24 +35,23 @@ public class CustomAdapter extends ArrayAdapter {
         LayoutInflater inflater = (LayoutInflater) parent_context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowV = inflater.inflate(layout_id, parent, false);
 
-        TextView songT = rowV.findViewById(R.id.textViewTitle);
-        TextView songS = rowV.findViewById(R.id.textViewSinger);
-        TextView songYrR = rowV.findViewById(R.id.textViewYrReleased);
-        RatingBar songStarRB = rowV.findViewById(R.id.starRBar);
-        ImageView songNew = rowV.findViewById(R.id.ivNew);
+        TextView foodN = rowV.findViewById(R.id.textViewName);
+        TextView foodDesc = rowV.findViewById(R.id.textViewDesc);
+        TextView foodPrice = rowV.findViewById(R.id.textViewPrice);
+        RatingBar foodStarRB = rowV.findViewById(R.id.starRBar);
+        ImageView delish = rowV.findViewById(R.id.ivDelish);
 
-        Song current = songAL.get(position);
-        songT.setText(current.getTitle());
-        songS.setText(current.getSingers());
-        songYrR.setText(current.getYears() + "");
-        songStarRB.setRating(current.getStars());
-        songNew.setImageResource(R.drawable.newsong);
+        SGFood current = foodAL.get(position);
+        foodN.setText(current.getName());
+        foodDesc.setText(current.getDesc());
+        foodPrice.setText(current.getPrice() + "");
+        foodStarRB.setRating(current.getStars());
 
-        if (current.getYears() >= 2019) {
-            songNew.setVisibility(View.VISIBLE);
+        if (current.getStars() >= 3) {
+            delish.setVisibility(View.VISIBLE);
         }
         else {
-            songNew.setVisibility(View.INVISIBLE);
+            delish.setVisibility(View.INVISIBLE);
         }
         return rowV;
     }

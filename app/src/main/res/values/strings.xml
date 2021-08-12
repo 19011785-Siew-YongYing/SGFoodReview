@@ -1,29 +1,26 @@
 <resources>
-    <string name="app_name">NDPSong</string>
+    <string name="app_name">Singapore Food</string>
 
     <!-- For Main Activity -->
-    <string name="tvTitle">Song Title:</string>
-    <string name="inputTitle">Enter Song Title Here</string>
-    <string name="tvSingers">Singer(s):</string>
-    <string name="inputSingers">Enter Singers\' Name Here</string>
-    <string name="tvYear">Year:</string>
-    <string name="inputYear">Enter Year of Release Here</string>
+    <string name="tvName">Food Name:</string>
+    <string name="inputName">Enter Food Name Here</string>
+    <string name="tvDesc">Food Description: *</string>
+    <string name="inputDesc">Enter Food\'s Description Here</string>
+    <string name="tvPrice">Price:</string>
+    <string name="inputPrice">Enter Price of Food</string>
     <string name="tvStars">Stars:</string>
-    <string name="star1">1</string>
-    <string name="star2">2</string>
-    <string name="star3">3</string>
-    <string name="star4">4</string>
-    <string name="star5">5</string>
-    <string name="textviewID">Song ID:</string>
+
+    <string name="textviewID">Food ID:</string>
     <string name="btnInsert">INSERT</string>
     <string name="btnSL">SHOW LIST</string>
 
     <!-- For Show Activity -->
-    <string name="tvHeader">SHOW ALL SONGS WITH 5 STARS</string>
+    <string name="tvHeader">SHOW ALL FOOD WITH 5 STARS</string>
 
     <!-- For Modify Activity -->
     <string name="btnUpdate">UPDATE</string>
     <string name="btnDel">DELETE</string>
     <string name="btnCancel">CANCEL</string>
+    <string name="tvInstructions">"* - This is a food review app! You can use the 'Food Description' field to state why you like the food! :D "</string>
 
 </resources>

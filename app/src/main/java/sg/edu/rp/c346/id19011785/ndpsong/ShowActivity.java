@@ -16,40 +16,25 @@ import java.util.ArrayList;
 public class ShowActivity extends AppCompatActivity {
 
     Button show5s;
-    ArrayList<Song> songAL;
-    ListView songLV;
-    //ArrayAdapter<Song> songAA;
-    CustomAdapter adpt; // Lesson 10 - Custom List View
+    ArrayList<SGFood> foodAL;
+    ListView foodLV;
+    CustomAdapter adpt;
     boolean check = true;
-
-    Spinner spinner;
-    ArrayList<String> yrs;
-    ArrayAdapter<String> aaYrs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
 
-        songLV = findViewById(R.id.lvSongs);
+        setTitle("Singapore Food - List of Food");
+
+        foodLV = findViewById(R.id.lvSongs);
         show5s = findViewById(R.id.btnShow5S);
-        spinner = findViewById(R.id.spinnerYear);
         DBHelper dbh = new DBHelper(ShowActivity.this);
-        songAL = dbh.getAllSongs();
-        yrs = dbh.getYears();
+        foodAL = dbh.getAllFood();
 
-        /*songAA = new ArrayAdapter<Song>(this, android.R.layout.simple_list_item_1, songAL);
-        songLV.setAdapter(songAA);
-        songAA.notifyDataSetChanged();*/
-        // Lesson 10
-        adpt = new CustomAdapter(ShowActivity.this, R.layout.row, songAL);
-        songLV.setAdapter(adpt);
-        adpt.notifyDataSetChanged();
-
-        aaYrs = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, yrs);
-        spinner.setAdapter(aaYrs);
-        //songAA.notifyDataSetChanged();
-        // Lesson 10
+        adpt = new CustomAdapter(ShowActivity.this, R.layout.row, foodAL);
+        foodLV.setAdapter(adpt);
         adpt.notifyDataSetChanged();
         dbh.close();
         
@@ -58,15 +43,15 @@ public class ShowActivity extends AppCompatActivity {
             public void onClick(View v) {
                 DBHelper dbh = new DBHelper(ShowActivity.this);
                 if (check == true) {
-                    songAL.clear();
-                    songAL.addAll(dbh.getAllSongs(5));
+                    foodAL.clear();
+                    foodAL.addAll(dbh.getAllFood(5));
                     //songAA.notifyDataSetChanged();
                     adpt.notifyDataSetChanged();
                     check = false;
                 }
                 else if (check == false) {
-                    songAL.clear();
-                    songAL.addAll(dbh.getAllSongs());
+                    foodAL.clear();
+                    foodAL.addAll(dbh.getAllFood());
                     //songAA.notifyDataSetChanged();
                     adpt.notifyDataSetChanged();
                     check = true;
@@ -74,7 +59,9 @@ public class ShowActivity extends AppCompatActivity {
             }
         });
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        // for the spinner, I will try using the price range ;
+        // but I have not tried it yet, will try soon
+        /*spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 DBHelper dbh = new DBHelper(ShowActivity.this);
@@ -88,14 +75,14 @@ public class ShowActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
 
-        songLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        foodLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Song target = songAL.get(position);
+                SGFood target = foodAL.get(position);
                 Intent i = new Intent(ShowActivity.this, ModifyActivity.class);
-                i.putExtra("song", target);
+                i.putExtra("food", target);
                 startActivity(i);
             }
         });
@@ -105,13 +92,12 @@ public class ShowActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         DBHelper dbh = new DBHelper(ShowActivity.this);
-        songAL.clear();
-        songAL.addAll(dbh.getAllSongs());
-        //songAA.notifyDataSetChanged();
+        foodAL.clear();
+        foodAL.addAll(dbh.getAllFood());
         adpt.notifyDataSetChanged();
 
-        yrs.clear();
+        /*yrs.clear();
         yrs.addAll(dbh.getYears());
-        aaYrs.notifyDataSetChanged();
+        aaYrs.notifyDataSetChanged();*/
     }
 }

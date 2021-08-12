@@ -24,15 +24,15 @@
         android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/TVTitle"
+        android:id="@+id/TVFName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/amaranth"
-        android:text="@string/tvTitle"
+        android:text="@string/tvName"
         android:textSize="20dp" />
 
     <EditText
-        android:id="@+id/titleET"
+        android:id="@+id/nameET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -40,15 +40,15 @@
         android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/TVSingers"
+        android:id="@+id/TVFDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/amaranth"
-        android:text="@string/tvSingers"
+        android:text="@string/tvDesc"
         android:textSize="20dp" />
 
     <EditText
-        android:id="@+id/singersET"
+        android:id="@+id/fDescET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -56,11 +56,11 @@
         android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/TVYear"
+        android:id="@+id/TVFPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/amaranth"
-        android:text="@string/tvYear"
+        android:text="@string/tvPrice"
         android:textSize="20dp" />
 
     <EditText
