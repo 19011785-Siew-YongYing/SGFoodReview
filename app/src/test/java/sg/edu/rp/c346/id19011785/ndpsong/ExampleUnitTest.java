@@ -1,4 +1,4 @@
-package sg.edu.rp.c346.id19011785.sgfood;
+package sg.edu.rp.c346.id19011785.ndpsong;
 
 import org.junit.Test;
 
