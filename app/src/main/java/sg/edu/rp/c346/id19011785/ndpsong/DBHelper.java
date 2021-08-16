@@ -120,6 +120,32 @@ public class DBHelper extends SQLiteOpenHelper {
         return foods;
     }
 
+    public ArrayList<SGFood> getRecommends(int recFilter) {
+        ArrayList<SGFood> foods = new ArrayList<SGFood>();
+        SQLiteDatabase db =  this.getReadableDatabase();
+        String[] cols = {COLUMN_ID, COLUMN_NAME, COLUMN_DESC, COLUMN_PRICE, COLUMN_STARS, COLUMN_REC};
+        String condition = COLUMN_REC + " == ? ";
+        String[] args = {String.valueOf(recFilter)};
+
+        Cursor c = db.query(TABLE_FOOD, cols, condition, args, null, null, null, null);
+
+        if (c.moveToFirst()) {
+            do {
+                int id = c.getInt(0);
+                String name = c.getString(1);
+                String desc = c.getString(2);
+                double price = c.getInt(3);
+                int starss = c.getInt(4);
+                int recc = c.getInt(5);
+                SGFood song = new SGFood(id, name, desc, price, starss, recc);
+                foods.add(song);
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return foods;
+    }
+
     public int updateFood(SGFood food) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

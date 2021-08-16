@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,7 @@ public class ShowActivity extends AppCompatActivity {
     ArrayList<SGFood> foodAL;
     ListView foodLV;
     CustomAdapter adpt;
+    Spinner spinner;
     boolean check = true;
 
     @Override
@@ -30,6 +32,8 @@ public class ShowActivity extends AppCompatActivity {
         show5s = findViewById(R.id.btnShow5S);
         DBHelper dbh = new DBHelper(ShowActivity.this);
         foodAL = dbh.getAllFood();
+
+        spinner = findViewById(R.id.spinnerRec);
 
         adpt = new CustomAdapter(ShowActivity.this, R.layout.row, foodAL);
         foodLV.setAdapter(adpt);
@@ -57,23 +61,30 @@ public class ShowActivity extends AppCompatActivity {
             }
         });
 
-        // for the spinner, I will try using the price range ;
-        // but I have not tried it yet, will try soon
-        /*spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        // tried using the reommendations
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 DBHelper dbh = new DBHelper(ShowActivity.this);
-                foodAL.clear();
-                //songAL.addAll(dbh.getSongsByYear(Integer.valueOf(yrs.get(position))));
-                //songAA.notifyDataSetChanged();
-                adpt.notifyDataSetChanged();
+                switch (position) {
+                    case 0:
+                        foodAL.clear();
+                        foodAL.addAll(dbh.getRecommends(1));
+                        //songAA.notifyDataSetChanged();
+                        adpt.notifyDataSetChanged();
+                        break;
+                    case 1:
+                        foodAL.clear();
+                        foodAL.addAll(dbh.getRecommends(0));
+                        adpt.notifyDataSetChanged();
+                        break;
+                }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });*/
+        });
 
         foodLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

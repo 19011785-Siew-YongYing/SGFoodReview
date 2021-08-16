@@ -29,4 +29,9 @@
     <string name="description">This is a Food Review App for Singapore Food! \n You can add, edit and delete food items in the list! \n PRESS THE START BUTTON TO GET STARTED :D</string>
     <string name="cbRec">Recommend?</string>
 
+    <string-array name="spinnerItems">
+        <item>Recommended</item>
+        <item>Not Recommended</item>
+    </string-array>
+
 </resources>
