@@ -21,6 +21,12 @@
     <string name="btnUpdate">UPDATE</string>
     <string name="btnDel">DELETE</string>
     <string name="btnCancel">CANCEL</string>
-    <string name="tvInstructions">"* - This is a food review app! You can use the 'Food Description' field to state why you like the food! :D "</string>
+    <string name="tvInstructions">"* - You can use 'Food Description' field to state why you like the food! :D "</string>
+
+    <!-- For Main Page before MainActivity 1-->
+    <string name="headingM">Welcome!</string>
+    <string name="button">START</string>
+    <string name="description">This is a Food Review App for Singapore Food! \n You can add, edit and delete food items in the list! \n PRESS THE START BUTTON TO GET STARTED :D</string>
+    <string name="cbRec">Recommend?</string>
 
 </resources>

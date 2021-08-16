@@ -1,4 +1,4 @@
-package sg.edu.rp.c346.id19011785.ndpsong;
+package sg.edu.rp.c346.id19011785.sgfood;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,12 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.SyncStateContract;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +19,7 @@ public class ModifyActivity extends AppCompatActivity {
     TextView viewID, viewName, viewDesc, viewPrice, viewStar;
     EditText editID, editName, editDesc, editPrice;
     RatingBar ratebStars;
+    CheckBox cbRecommend;
     Button upBtn, delBtn, cancelBtn;
     SGFood food;
 
@@ -43,6 +42,7 @@ public class ModifyActivity extends AppCompatActivity {
         editDesc = findViewById(R.id.fDescET);
         editPrice = findViewById(R.id.yearET);
         ratebStars = findViewById(R.id.rbStar);
+        cbRecommend = findViewById(R.id.checkBox2);
 
         upBtn = findViewById(R.id.btnUpdate);
         delBtn = findViewById(R.id.btnDelete);
@@ -57,6 +57,13 @@ public class ModifyActivity extends AppCompatActivity {
         editDesc.setText(food.getDesc());
         editPrice.setText(food.getPrice()+"");
         ratebStars.setRating(food.getStars());
+        if (food.getRec() == 1) {
+            cbRecommend.setChecked(true);
+        }
+        else {
+            cbRecommend.setChecked(false);
+        }
+
 
         upBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +73,14 @@ public class ModifyActivity extends AppCompatActivity {
                 food.setDesc(editDesc.getText().toString().trim());
                 food.setPrice(Double.parseDouble(editPrice.getText().toString().trim()));
                 food.setStars((int) ratebStars.getRating());
+                int checkb = 0;
+                if (cbRecommend.isChecked() == true) {
+                    checkb = 1;
+                }
+                else {
+                    checkb = 0;
+                }
+                food.setRec(checkb);
 
                 int res = dbh.updateFood(food);
                 if (res > 0) {
@@ -105,7 +120,6 @@ public class ModifyActivity extends AppCompatActivity {
                 myBuilder.setPositiveButton("CANCEL", null);
                 AlertDialog myDialog =myBuilder.create();
                 myDialog.show();
-
             }
         });
 
@@ -131,6 +145,14 @@ public class ModifyActivity extends AppCompatActivity {
                         food.setDesc(editDesc.getText().toString().trim());
                         food.setPrice(Double.parseDouble(editPrice.getText().toString().trim()));
                         food.setStars((int) ratebStars.getRating());
+                        int checkb1 = 0;
+                        if (cbRecommend.isChecked() == true) {
+                            checkb1 = 1;
+                        }
+                        else {
+                            checkb1 = 0;
+                        }
+                        food.setRec(checkb1);
                     }
                 });
 

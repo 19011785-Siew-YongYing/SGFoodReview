@@ -1,6 +1,4 @@
-package sg.edu.rp.c346.id19011785.ndpsong;
-
-import androidx.annotation.NonNull;
+package sg.edu.rp.c346.id19011785.sgfood;
 
 import java.io.Serializable;
 
@@ -11,13 +9,15 @@ public class SGFood implements Serializable {
     private String desc;
     private double price;
     private int stars;
+    private int rec;
 
-    public SGFood(int id, String name, String desc, double price, int stars) {
+    public SGFood(int id, String name, String desc, double price, int stars, int rec) {
         this.id = id;
         this.name = name;
         this.desc = desc;
         this.price = price;
         this.stars = stars;
+        this.rec = rec;
     }
 
     public int getId() {
@@ -58,6 +58,14 @@ public class SGFood implements Serializable {
 
     public void setStars(int stars) {
         this.stars = stars;
+    }
+
+    public int getRec() {
+        return rec;
+    }
+
+    public void setRec(int rec) {
+        this.rec = rec;
     }
 
     @Override

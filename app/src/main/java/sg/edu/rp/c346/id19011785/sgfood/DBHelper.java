@@ -1,4 +1,4 @@
-package sg.edu.rp.c346.id19011785.ndpsong;
+package sg.edu.rp.c346.id19011785.sgfood;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -18,6 +18,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String COLUMN_DESC = "description";
     private static final String COLUMN_PRICE = "price";
     private static final String COLUMN_STARS = "stars";
+    private static final String COLUMN_REC = "recommend";
 
     public DBHelper (Context context) {
         super (context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -30,7 +31,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 + COLUMN_NAME + " TEXT, "
                 + COLUMN_DESC + " TEXT, "
                 + COLUMN_PRICE + " REAL, "
-                + COLUMN_STARS + " INTEGER ) ";
+                + COLUMN_STARS + " INTEGER, "
+                + COLUMN_REC + " INTEGER ) ";
         db.execSQL(createSongTableSql);
         Log.i("info", createSongTableSql + "\ncreated tables");
     }
@@ -39,15 +41,18 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FOOD);
         onCreate(db);
+
+        //db.execSQL("ALTER TABLE " + TABLE_FOOD + " ADD COLUMN recommend INT");
     }
 
-    public long insertFood(String name, String desc, double price, int stars){
+    public long insertFood(String name, String desc, double price, int stars, int rec){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values =new ContentValues();
         values.put(COLUMN_NAME, name);
         values.put(COLUMN_DESC, desc);
         values.put(COLUMN_PRICE, price);
         values.put(COLUMN_STARS, stars);
+        values.put(COLUMN_REC, rec);
 
         long result = db.insert(TABLE_FOOD, null, values);
 
@@ -66,7 +71,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String selectQ = "SELECT " + COLUMN_ID + " , " + COLUMN_NAME + " , "
                 + COLUMN_DESC + " , " + COLUMN_PRICE + " , "
-                + COLUMN_STARS + " FROM " + TABLE_FOOD;
+                + COLUMN_STARS + " , " + COLUMN_REC + " FROM " + TABLE_FOOD;
 
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -78,7 +83,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 String desc = cursor.getString(2);
                 double price = cursor.getDouble(3);
                 int stars = cursor.getInt(4);
-                SGFood food = new SGFood(id, name, desc, price, stars);
+                int rec = cursor.getInt(5);
+                SGFood food = new SGFood(id, name, desc, price, stars, rec);
                 foods.add(food);
             } while (cursor.moveToNext());
         }
@@ -91,7 +97,7 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<SGFood> foods = new ArrayList<SGFood>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns = {COLUMN_ID, COLUMN_NAME, COLUMN_DESC, COLUMN_PRICE, COLUMN_STARS};
+        String[] columns = {COLUMN_ID, COLUMN_NAME, COLUMN_DESC, COLUMN_PRICE, COLUMN_STARS, COLUMN_REC};
         String condition = COLUMN_STARS + " >= ?";
         String[] args = {String.valueOf(stars)};
 
@@ -104,7 +110,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 String desc = cursor.getString(2);
                 double price = cursor.getInt(3);
                 int starss = cursor.getInt(4);
-                SGFood song = new SGFood(id, name, desc, price, starss);
+                int recc = cursor.getInt(5);
+                SGFood song = new SGFood(id, name, desc, price, starss, recc);
                 foods.add(song);
             } while (cursor.moveToNext());
         }
@@ -120,6 +127,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_DESC, food.getDesc());
         values.put(COLUMN_PRICE, food.getPrice());
         values.put(COLUMN_STARS, food.getStars());
+        values.put(COLUMN_REC, food.getRec());
         String condition = COLUMN_ID + " = ?";
         String[] args = {String.valueOf(food.getId())};
 

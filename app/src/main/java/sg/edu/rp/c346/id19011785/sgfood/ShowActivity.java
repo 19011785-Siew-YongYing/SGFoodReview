@@ -1,4 +1,4 @@
-package sg.edu.rp.c346.id19011785.ndpsong;
+package sg.edu.rp.c346.id19011785.sgfood;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,10 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Spinner;
 
 import java.util.ArrayList;
 
@@ -65,8 +63,8 @@ public class ShowActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 DBHelper dbh = new DBHelper(ShowActivity.this);
-                songAL.clear();
-                songAL.addAll(dbh.getSongsByYear(Integer.valueOf(yrs.get(position))));
+                foodAL.clear();
+                //songAL.addAll(dbh.getSongsByYear(Integer.valueOf(yrs.get(position))));
                 //songAA.notifyDataSetChanged();
                 adpt.notifyDataSetChanged();
             }

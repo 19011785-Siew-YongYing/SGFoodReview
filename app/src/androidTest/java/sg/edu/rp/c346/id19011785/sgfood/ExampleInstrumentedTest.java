@@ -1,4 +1,4 @@
-package sg.edu.rp.c346.id19011785.ndpsong;
+package sg.edu.rp.c346.id19011785.sgfood;
 
 import android.content.Context;
 

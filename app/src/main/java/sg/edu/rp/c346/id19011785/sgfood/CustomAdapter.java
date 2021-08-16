@@ -1,7 +1,6 @@
-package sg.edu.rp.c346.id19011785.ndpsong;
+package sg.edu.rp.c346.id19011785.sgfood;
 
 import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,19 +39,32 @@ public class CustomAdapter extends ArrayAdapter {
         TextView foodPrice = rowV.findViewById(R.id.textViewPrice);
         RatingBar foodStarRB = rowV.findViewById(R.id.starRBar);
         ImageView delish = rowV.findViewById(R.id.ivDelish);
+        ImageView rec = rowV.findViewById(R.id.ivRec);
 
         SGFood current = foodAL.get(position);
         foodN.setText(current.getName());
         foodDesc.setText(current.getDesc());
-        foodPrice.setText(current.getPrice() + "");
+        String fP = String.format("%.2f", current.getPrice());
+        foodPrice.setText(fP + "");
         foodStarRB.setRating(current.getStars());
 
-        if (current.getStars() >= 3) {
+        if (current.getStars() >= 3 && current.getRec() == 1) {
             delish.setVisibility(View.VISIBLE);
+            rec.setVisibility(View.VISIBLE);
+        }
+        else if (current.getStars() < 3 && current.getRec() == 1) {
+            delish.setVisibility(View.INVISIBLE);
+            rec.setVisibility(View.VISIBLE);
+        }
+        else if (current.getStars() >= 3 && current.getRec() == 0) {
+            delish.setVisibility(View.VISIBLE);
+            rec.setVisibility(View.INVISIBLE);
         }
         else {
             delish.setVisibility(View.INVISIBLE);
+            rec.setVisibility(View.INVISIBLE);
         }
+
         return rowV;
     }
 }
