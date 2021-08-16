@@ -47,21 +47,19 @@ public class ShowActivity extends AppCompatActivity {
                 if (check == true) {
                     foodAL.clear();
                     foodAL.addAll(dbh.getAllFood(5));
-                    //songAA.notifyDataSetChanged();
                     adpt.notifyDataSetChanged();
                     check = false;
                 }
                 else if (check == false) {
                     foodAL.clear();
                     foodAL.addAll(dbh.getAllFood());
-                    //songAA.notifyDataSetChanged();
                     adpt.notifyDataSetChanged();
                     check = true;
                 }
             }
         });
 
-        // tried using the reommendations
+        // tried using the reommendations ; completed
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -70,7 +68,6 @@ public class ShowActivity extends AppCompatActivity {
                     case 0:
                         foodAL.clear();
                         foodAL.addAll(dbh.getRecommends(1));
-                        //songAA.notifyDataSetChanged();
                         adpt.notifyDataSetChanged();
                         break;
                     case 1:
@@ -105,8 +102,5 @@ public class ShowActivity extends AppCompatActivity {
         foodAL.addAll(dbh.getAllFood());
         adpt.notifyDataSetChanged();
 
-        /*yrs.clear();
-        yrs.addAll(dbh.getYears());
-        aaYrs.notifyDataSetChanged();*/
     }
 }
